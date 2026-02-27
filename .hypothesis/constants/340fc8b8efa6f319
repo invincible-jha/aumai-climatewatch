@@ -1,0 +1,4 @@
+# file: M:\Project DarkMatter\workspace\aumai-climatewatch\src\aumai_climatewatch\models.py
+# hypothesis_version: 6.151.9
+
+[0.0, 'ClimateReport', 'ClimateZone', 'WeatherAlert']

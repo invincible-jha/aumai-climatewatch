@@ -8,6 +8,7 @@ import sys
 import click
 
 from .core import AlertGenerator, ClimateAnalyzer, ClimateZoneRegistry
+from .models import ENVIRONMENTAL_DISCLAIMER
 
 
 @click.group()
@@ -57,7 +58,7 @@ def alerts(zone: str, data_file: str | None) -> None:
             click.echo(f"MESSAGE:    {alert.message}")
             click.echo(f"VALID UNTIL: {alert.valid_until.strftime('%Y-%m-%d %H:%M UTC')}")
 
-    click.echo()
+    click.echo(f"\nDISCLAIMER: {ENVIRONMENTAL_DISCLAIMER}\n")
 
 
 @main.command("report")
@@ -103,7 +104,7 @@ def report(zone: str, data_file: str | None) -> None:
         if isinstance(details, dict):
             for k, v in details.items():
                 click.echo(f"    {k}: {v}")
-    click.echo()
+    click.echo(f"\nDISCLAIMER: {ENVIRONMENTAL_DISCLAIMER}\n")
 
 
 @main.command("zones")
@@ -115,20 +116,16 @@ def zones() -> None:
     click.echo("-" * 75)
     for zone in registry.all_zones():
         click.echo(f"{zone.zone_id:<22} {zone.name:<22} {zone.avg_rainfall_mm:>14.0f} {zone.avg_temp_c:>12.1f}")
-    click.echo()
+    click.echo(f"\nDISCLAIMER: {ENVIRONMENTAL_DISCLAIMER}\n")
 
 
 @main.command("serve")
 @click.option("--port", default=8000, help="Port to serve on")
-@click.option("--host", default="0.0.0.0", help="Host to bind to")
+@click.option("--host", default="127.0.0.1", help="Host to bind to")
 def serve(port: int, host: str) -> None:
-    """Start the ClimateWatch API server."""
-    try:
-        import uvicorn
-    except ImportError:
-        click.echo("Error: uvicorn is required. Install with: pip install uvicorn", err=True)
-        sys.exit(1)
-    uvicorn.run("aumai_climatewatch.api:app", host=host, port=port, reload=False)
+    """Start the ClimateWatch API server (not yet implemented)."""
+    click.echo("Error: The ClimateWatch API server is not yet available. The api module has not been implemented.", err=True)
+    sys.exit(1)
 
 
 if __name__ == "__main__":

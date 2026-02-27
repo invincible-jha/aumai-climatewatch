@@ -6,7 +6,14 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-__all__ = ["ClimateZone", "WeatherAlert", "ClimateReport"]
+ENVIRONMENTAL_DISCLAIMER = (
+    "Climate and weather data provided by this tool are estimates based on historical averages"
+    " and modelled projections. Do not use this tool as the sole basis for emergency response"
+    " decisions. Always verify alerts with official meteorological authorities such as IMD"
+    " (India Meteorological Department) before taking action."
+)
+
+__all__ = ["ClimateZone", "WeatherAlert", "ClimateReport", "ENVIRONMENTAL_DISCLAIMER"]
 
 
 class ClimateZone(BaseModel):
